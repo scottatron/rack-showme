@@ -35,7 +35,7 @@ module Rack
 
       body = @response.body
       body.gsub!("</body>", "#{css_line}</body>")
-      body.gsub!("<body>", "<body>#{message_box}")
+      body.gsub!(/(<body[^<\/]*>)/, '\1' + message_box)
       @response.body = body
 
       @headers["Content-Length"] = @response.body.bytesize.to_s
